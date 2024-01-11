@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Servlets_JSP.iml" filepath="$PROJECT_DIR$/.idea/Servlets_JSP.iml" />
       <module fileurl="file://$PROJECT_DIR$/jspdemo/jspdemo.iml" filepath="$PROJECT_DIR$/jspdemo/jspdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servletdemo/servletdemo.iml" filepath="$PROJECT_DIR$/servletdemo/servletdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/tagdemo/tagdemo.iml" filepath="$PROJECT_DIR$/tagdemo/tagdemo.iml" />
     </modules>
   </component>

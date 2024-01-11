@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jspdemo" />
         <module name="tagdemo" />
+        <module name="servletdemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="jspdemo" target="11" />
+      <module name="servletdemo" target="11" />
       <module name="tagdemo" target="11" />
     </bytecodeTargetLevel>
   </component>
