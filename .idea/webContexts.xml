@@ -3,6 +3,8 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/servletdemo/src/main/webapp/MVC_Demo/view_students.jsp" value="file://$PROJECT_DIR$/servletdemo/src/main/webapp/MVC_Demo" />
+        <entry key="file://$PROJECT_DIR$/servletdemo/src/main/webapp/view_students.jsp" value="file://$PROJECT_DIR$/servletdemo/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/tagdemo/src/main/WebContent/test.jsp" value="file://$PROJECT_DIR$/tagdemo/src/main/WebContent" />
         <entry key="file://$PROJECT_DIR$/tagdemo/src/main/webapp/JSPTagsExample/foreach-simple-test.jsp" value="file://$PROJECT_DIR$/tagdemo/src/main/webapp/JSPTagsExample" />
       </map>
