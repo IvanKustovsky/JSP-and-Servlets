@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/jspdemo/jspdemo.iml" filepath="$PROJECT_DIR$/jspdemo/jspdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/servletdemo/servletdemo.iml" filepath="$PROJECT_DIR$/servletdemo/servletdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/tagdemo/tagdemo.iml" filepath="$PROJECT_DIR$/tagdemo/tagdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-student-tracker/web-student-tracker.iml" filepath="$PROJECT_DIR$/web-student-tracker/web-student-tracker.iml" />
     </modules>
   </component>
 </project>

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jspdemo" />
+        <module name="web-student-tracker" />
         <module name="tagdemo" />
         <module name="servletdemo" />
       </profile>
@@ -15,6 +16,7 @@
       <module name="jspdemo" target="11" />
       <module name="servletdemo" target="11" />
       <module name="tagdemo" target="11" />
+      <module name="web-student-tracker" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,6 +4,7 @@
     <file type="web" url="file://$PROJECT_DIR$/jspdemo" />
     <file type="web" url="file://$PROJECT_DIR$/servletdemo" />
     <file type="web" url="file://$PROJECT_DIR$/tagdemo" />
+    <file type="web" url="file://$PROJECT_DIR$/web-student-tracker" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -11,6 +12,7 @@
         <option value="$PROJECT_DIR$/jspdemo/pom.xml" />
         <option value="$PROJECT_DIR$/tagdemo/pom.xml" />
         <option value="$PROJECT_DIR$/servletdemo/pom.xml" />
+        <option value="$PROJECT_DIR$/web-student-tracker/pom.xml" />
       </list>
     </option>
   </component>
