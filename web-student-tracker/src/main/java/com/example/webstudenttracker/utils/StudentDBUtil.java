@@ -4,6 +4,7 @@ import com.example.webstudenttracker.models.Student;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -80,4 +81,34 @@ public class StudentDBUtil {
     }
 
 
+    public void addStudent(Student theStudent) throws Exception {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            // get db connection
+            connection = dataSource.getConnection();
+
+            // create sql statement
+            String sql = "insert into student " +
+                    "(first_name, last_name, email) " +
+                    "values (?, ?, ?)";
+
+            statement = connection.prepareStatement(sql);
+
+            // set the param values for the student
+            statement.setString(1, theStudent.getFirst_name());
+            statement.setString(2, theStudent.getLast_name());
+            statement.setString(3, theStudent.getEmail());
+
+            // execute sql insert
+            statement.execute();
+
+        }
+        finally {
+            // clean up JDBC objects
+            close(connection, statement,null);
+        }
+    }
 }
