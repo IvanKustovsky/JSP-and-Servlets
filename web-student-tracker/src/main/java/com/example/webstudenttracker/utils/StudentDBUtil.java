@@ -111,4 +111,85 @@ public class StudentDBUtil {
             close(connection, statement,null);
         }
     }
+
+    public Student getStudentById(String theStudentId) throws Exception {
+
+        Student theStudent;
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int studentId;
+
+        try {
+            // convert student id to int
+            studentId = Integer.parseInt(theStudentId);
+
+            // get connection to database
+            connection = dataSource.getConnection();
+
+            // create sql to get selected student
+            String sql = "select * from student where id=?";
+
+            // create prepared statement
+            preparedStatement = connection.prepareStatement(sql);
+
+            // set params
+            preparedStatement.setInt(1, studentId);
+
+            // execute statement
+            resultSet = preparedStatement.executeQuery();
+
+            // retrieve data from result set row
+            if(resultSet.next()){
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String email = resultSet.getString("email");
+
+                // use the studentId during construction
+                theStudent = new Student(studentId, firstName, lastName, email);
+            }
+            else {
+                throw new Exception("Could not find student id: " + studentId);
+            }
+
+            return theStudent;
+        }
+        finally {
+            // clean up JDBC objects
+            close(connection, preparedStatement, resultSet);
+        }
+
+    }
+
+    public void updateStudent(Student theStudent) throws Exception {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            // get db connection
+            connection = dataSource.getConnection();
+
+            // create sql update statement
+            String sql = "update student set first_name=?, last_name=?, email=? where id=?";
+
+            // prepare statement
+            statement = connection.prepareStatement(sql);
+
+            // set params
+            statement.setString(1, theStudent.getFirst_name());
+            statement.setString(2, theStudent.getLast_name());
+            statement.setString(3, theStudent.getEmail());
+            statement.setInt(4, theStudent.getId());
+
+            // execute sql statement
+            statement.execute();
+
+        }
+        finally {
+            // clean up JDBC objects
+            close(connection, statement,null);
+        }
+    }
 }

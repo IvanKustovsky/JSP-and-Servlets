@@ -26,8 +26,7 @@ public class StudentControllerServlet extends HttpServlet {
         // create our student db util... and pass in the connection pool / datasource
         try {
             studentDBUtil = new StudentDBUtil(dataSource);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             throw new ServletException(exception);
         }
     }
@@ -39,32 +38,73 @@ public class StudentControllerServlet extends HttpServlet {
             // read the "command" parameter
             String theCommand = request.getParameter("command");
 
-            if(theCommand == null){
+            if (theCommand == null) {
                 theCommand = "LIST";
             }
 
             // route to the appropriate method
-            switch (theCommand){
+            switch (theCommand) {
 
-            case "LIST":
-                listStudents(request, response);
-                break;
+                case "LIST":
+                    listStudents(request, response);
+                    break;
 
-            case "ADD":
-                addStudent(request, response);
-                break;
+                case "ADD":
+                    addStudent(request, response);
+                    break;
 
-            default:
-                listStudents(request, response);
+                case "LOAD":
+                    loadStudent(request, response);
+                    break;
+
+                case "UPDATE":
+                    updateStudent(request, response);
+                    break;
+
+                default:
+                    listStudents(request, response);
             }
 
             // list the students... in MVC fashion
             listStudents(request, response);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             throw new ServletException(exception);
         }
 
+    }
+
+    private void loadStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        // read student id from form data
+        String theStudentId = request.getParameter("studentId");
+
+        // get student from db (db util)
+        Student theStudent = studentDBUtil.getStudentById(theStudentId);
+
+        // place student in the request attribute
+        request.setAttribute("THE_STUDENT", theStudent);
+
+        // send to jsp page: update-student-form.jsp
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/update-student-form.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        // read student info from form data
+        int id = Integer.parseInt(request.getParameter("studentId"));
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+
+        // create a new student object
+        Student theStudent = new Student(id, firstName, lastName, email);
+
+        // perform update on database
+        studentDBUtil.updateStudent(theStudent);
+
+        // send back to main page (the student list)
+        listStudents(request, response);
     }
 
     private void addStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
