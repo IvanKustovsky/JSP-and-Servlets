@@ -12,6 +12,7 @@
     <title>Add Student</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/add-student-style.css">
+    <script type="text/javascript" src="js/student-validation.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 <div id="container">
     <div id="content">
         <h3>Add Student</h3>
-        <form action="StudentControllerServlet" method="get">
+        <form action="StudentControllerServlet" method="post" name="studentForm" onSubmit="return validateForm()">
             <input type="hidden" name="command" value="ADD"/>
 
             <table>

@@ -27,6 +27,17 @@
         onclick="window.location.href='add-student-form.jsp'; return false;"
         class="add-student-button"/>
 
+        <!--  add a search box -->
+        <form action="StudentControllerServlet" method="GET">
+
+            <input type="hidden" name="command" value="SEARCH" />
+
+            Search student: <input type="text" name="theSearchName" />
+
+            <input type="submit" value="Search" class="add-student-button" />
+
+        </form>
+
         <table border="1">
             <tr>
                 <th>First Name</th>
@@ -42,11 +53,21 @@
                     <c:param name="command" value="LOAD" />
                     <c:param name="studentId" value="${tempStudent.id}" />
                 </c:url>
+
+                <!-- set up a link to delete a student -->
+                <c:url var="deleteLink" value="StudentControllerServlet">
+                    <c:param name="command" value="DELETE" />
+                    <c:param name="studentId" value="${tempStudent.id}" />
+                </c:url>
+
                 <tr>
                     <td>${tempStudent.first_name}</td>
                     <td>${tempStudent.last_name}</td>
                     <td>${tempStudent.email}</td>
-                    <td><a href="${tempLink}">Update</a> </td>
+                    <td><a href="${tempLink}">Update</a>
+                        | <a href="${deleteLink}"
+                        onclick="if (!(confirm('Are you sure you want no delete this student?'))) return false">
+                            Delete</a></td>
                 </tr>
 
             </c:forEach>

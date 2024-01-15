@@ -49,16 +49,20 @@ public class StudentControllerServlet extends HttpServlet {
                     listStudents(request, response);
                     break;
 
-                case "ADD":
-                    addStudent(request, response);
-                    break;
-
                 case "LOAD":
                     loadStudent(request, response);
                     break;
 
                 case "UPDATE":
                     updateStudent(request, response);
+                    break;
+
+                case "DELETE":
+                    deleteStudent(request, response);
+                    break;
+
+                case "SEARCH":
+                    searchStudents(request, response);
                     break;
 
                 default:
@@ -70,6 +74,54 @@ public class StudentControllerServlet extends HttpServlet {
         } catch (Exception exception) {
             throw new ServletException(exception);
         }
+
+    }
+
+    private void searchStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // read search name from form data
+        String theSearchName = request.getParameter("theSearchName");
+
+        // search students from db util
+        List<Student> students = studentDBUtil.searchStudents(theSearchName);
+
+        // add students to the request
+        request.setAttribute("STUDENT_LIST", students);
+
+        // send to JSP page (view)
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            // read the "command" parameter
+            String theCommand = request.getParameter("command");
+
+            // route to the appropriate method
+            if (theCommand.equals("ADD")) {
+                addStudent(request, response);
+            } else {
+                listStudents(request, response);
+            }
+
+        }
+        catch (Exception exc) {
+            throw new ServletException(exc);
+        }
+
+    }
+
+    private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+        // read student id from form data
+        String theStudentId = request.getParameter("studentId");
+
+        // delete student from database
+        studentDBUtil.deleteStudent(theStudentId);
+
+        // send them back to "list student" page
+        listStudents(request, response);
 
     }
 
@@ -121,7 +173,8 @@ public class StudentControllerServlet extends HttpServlet {
         studentDBUtil.addStudent(theStudent);
 
         // send back to main page (the student list)
-        listStudents(request, response);
+        // SEND AS REDIRECT to avoid multiple-browser reload issue
+        response.sendRedirect(request.getContextPath() + "/StudentControllerServlet?command=LIST");
     }
 
     private void listStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
